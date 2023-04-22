@@ -1,6 +1,6 @@
 *.sqlite*
-*app/
-Console/
+.app/
+.Console/
 Policies/
 Providers/
 Traits/

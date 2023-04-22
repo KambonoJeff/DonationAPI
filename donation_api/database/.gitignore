@@ -1,1 +1,10 @@
 *.sqlite*
+app/
+Console/
+Policies/
+Providers/
+Traits/
+bootstrap/
+database/
+resources/
+storage/

@@ -1,5 +1,5 @@
 *.sqlite*
-app/
+*app/
 Console/
 Policies/
 Providers/

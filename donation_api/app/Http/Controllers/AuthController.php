@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
-use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserLoginRequest;
@@ -49,7 +47,7 @@ class AuthController extends Controller
       return $this->success([
 
         $user,
-        'token'=>$user->createToken('API token ')->plainTextToken
+        'token'=>$user->createToken('ACCESS_TOKEN')->plainTextToken
       ],200);
 
     }

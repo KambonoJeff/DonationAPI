@@ -9,15 +9,16 @@ use App\Http\Controllers\PostRequestController;
 
 
 Route::group(['middleware'=> ['auth:sanctum']], function(){
-
-});
-Route::get('/showusers', [AuthController::class,'showUsers']);
+  Route::get('/showusers', [AuthController::class,'showUsers']);
   Route::get('/ngo/show', [NgoController::class,'show']);
   Route::get('/showuser/{id}', [AuthController::class,'showUser']);
   Route::get('/logout/{$id}', [AuthController::class,'logout']);
   Route::get('/ngo/logout', [NgoController::class,'logout']);
   Route::apiResource('/food',FoodBankController::class);
   Route::apiResource('/PostRequest', PostRequestController::class);
+
+
+});
 
 //User Authentication
 Route::post('/register', [AuthController::class,'create']);

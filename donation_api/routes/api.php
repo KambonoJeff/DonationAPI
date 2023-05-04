@@ -9,6 +9,8 @@ use App\Http\Controllers\PostRequestController;
 
 
 Route::group(['middleware'=> ['auth:sanctum']], function(){
+  Route::post('/login', [AuthController::class,'index']);
+
 
 });
 Route::get('/showusers', [AuthController::class,'showUsers']);
@@ -21,7 +23,6 @@ Route::get('/showusers', [AuthController::class,'showUsers']);
 
 //User Authentication
 Route::post('/register', [AuthController::class,'create']);
-Route::post('/login', [AuthController::class,'index']);
 //Ngo Authentication
 Route::post('/ngo/register', [NgoController::class,'create']);
 Route::post('/ngo/login', [NgoController::class,'login']);

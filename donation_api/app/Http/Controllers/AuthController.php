@@ -46,12 +46,10 @@ class AuthController extends Controller
         'type'=>$request->type,
         'password'=>Hash::make($request->password)
       ]);
-      return $this->success([
-
+      return response()->json([
         $user,
         'token'=>$user->createToken('API token ')->plainTextToken
-      ],200);
-
+      ]);
     }
     public function showUsers(){
       //working
@@ -65,12 +63,15 @@ class AuthController extends Controller
 
       ]);
     }
-    public function logout($id)
+    public function logout(Request $request)
     {
       //pending
-      $data = User::findOrFail($id);
-      $data->get()->token()->delete();
-      Auth::logout();
+      // $data = User::findOrFail($id);
+      // $data->get()->token()->delete();
+      // Auth::logout();
+
+      $user = $request->User();
+      $user->currentAccessToken()->delete();
       return response()->json(['logged out'],204);
     }
 }

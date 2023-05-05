@@ -20,13 +20,14 @@ class AuthController extends Controller
     public function index(UserLoginRequest $request)
     {
       //working
-
-      $request->validated($request->all());
-      if(!Auth::attempt($request->only(['email','password']) )){
-        return $this->error('','Credentials do not match',401);
+      $credentials = $request->validated($request->all());
+      if(!Auth()->check($credentials)){
+        return response([
+          'message'=>'provided Email or Password is incorrect!'
+        ]);
       }
       $user = User::where('email', $request->email)->first();
-      return $this->success([
+      return response()->json([
         'user'=>$user,
         'token'=>$user->createToken('Api token of'.$user->name)->plainTextToken
       ]);

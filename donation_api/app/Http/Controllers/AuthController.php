@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
-use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserLoginRequest;
@@ -49,8 +48,9 @@ class AuthController extends Controller
       ]);
       return response()->json([
         $user,
-        'token'=>$user->createToken('API token ')->plainTextToken
-      ]);
+        'token'=>$user->createToken('ACCESS_TOKEN')->plainTextToken
+      ],200);
+
     }
     public function showUsers(){
       //working
@@ -67,12 +67,9 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
       //pending
-      // $data = User::findOrFail($id);
-      // $data->get()->token()->delete();
-      // Auth::logout();
-
-      $user = $request->User();
+      $user = $request->user();
       $user->currentAccessToken()->delete();
-      return response()->json(['logged out'],204);
+
+      return response()->json('Logged Out', 200);
     }
 }

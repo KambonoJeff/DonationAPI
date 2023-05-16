@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +25,7 @@ class AuthController extends Controller
         return $this->error('','Credentials do not match',401);
       }
       $user = User::where('email', $request->email)->first();
-      return $this->success([
+      return response()->json([
         'user'=>$user,
         'token'=>$user->createToken('Api token of'.$user->name)->plainTextToken
       ]);
@@ -63,12 +64,12 @@ class AuthController extends Controller
 
       ]);
     }
-    public function logout($id)
+    public function logout(Request $request)
     {
       //pending
-      $data = User::findOrFail($id);
-      $data->get()->token()->delete();
-      Auth::logout();
-      return response()->json(['logged out'],204);
+      $user = $request->user();
+      $user->currentAccessToken()->delete();
+
+      return response()->json('Logged Out', 200);
     }
 }

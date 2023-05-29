@@ -7,6 +7,7 @@
   <title>DonationAPI</title>
 </head>
 <body>
-
+  <h1 align="center">Donation API Backend</h1>
+  <h2 align="center">Several Asynchronous procedures are occuring in the back of the system</h2>
 </body>
 </html>

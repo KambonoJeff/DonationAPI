@@ -23,13 +23,13 @@ class FoodBankController extends Controller
         $sumsnacks = FoodBank::pluck('snacks')->toArray();
         $sumBreak = FoodBank::pluck('breakfast')->toArray();
 
-          $totalCash = array_sum($sumcash);
-          $totalBreak = array_sum($sumBreak);
-          $totalSnacks = array_sum($sumsnacks);
-          $totaproteins = array_sum($sumproteins);
-          $totalcereals = array_sum($sumcereals);
-          $totallegume = array_sum($sumlegume);
-          $data = [$totalcereals,$totaproteins,$totallegume,$totalBreak,$totalSnacks,$totalCash,$food];
+        //  $totalCash = array_sum($sumcash);
+        //  $totalBreak = array_sum($sumBreak);
+        //  $totalSnacks = array_sum($sumsnacks);
+        //  $totaproteins = array_sum($sumproteins);
+        //  $totalcereals = array_sum($sumcereals);
+        //  $totallegume = array_sum($sumlegume);
+        //  $data = [$totalcereals,$totaproteins,$totallegume,$totalBreak,$totalSnacks,$totalCash,$food];
 
         $data = $food;
 

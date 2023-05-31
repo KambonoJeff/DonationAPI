@@ -8,6 +8,6 @@
 </head>
 <body>
   <h1 align="center">Donation API Backend</h1>
-  <h2 align="center">Several Asynchronous procedures are occuring in the back of the system</h2>
+  <h2 align="center">BACK GROUND operations are occuring in the system</h2>
 </body>
 </html>

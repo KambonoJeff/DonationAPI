@@ -26,10 +26,12 @@ class AuthController extends Controller
         ]);
       }
       $user = User::where('email', $request->email)->first();
-      return response()->json([
-        'user'=>$user,
-        'token'=>$user->createToken('Api token of'.$user->name)->plainTextToken
-      ]);
+
+      return response()->json(['data'=>'skdfvskdfhbvskdjhfbv']);
+      // return response()->json([
+      //   'user'=>$user,
+      //   'token'=>$user->createToken('Api token of'.$user->name)->plainTextToken
+      // ]);
 
     }
 

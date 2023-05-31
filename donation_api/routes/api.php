@@ -25,6 +25,7 @@ Route::group(['middleware'=> ['auth:sanctum']], function(){
 
 //User Authentication
 Route::post('/register', [AuthController::class,'create']);
+Route::post('/login', [AuthController::class,'index']);
 //Ngo Authentication
 Route::post('/ngo/register', [NgoController::class,'create']);
 Route::post('/ngo/login', [NgoController::class,'login']);

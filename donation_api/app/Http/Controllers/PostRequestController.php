@@ -22,7 +22,7 @@ class PostRequestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostRequestRequest $request)
+    public function debugtest(StorePostRequestRequest $request)
     {
         // $request->validated($request->all());
         // $postedrequest = PostRequest::create([

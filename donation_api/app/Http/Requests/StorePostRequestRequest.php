@@ -17,18 +17,18 @@ class StorePostRequestRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     *
+     * ,Rule::in(['Approved','Pending','NotApproved'])
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
     {
         return [
             'user_id'=>['required'],
-            'typeoffood'=>['required','string','max:255'],
-            'quantity'=>['required','integer'],
+            'typeoffood'=>['required','max:255'],
+            'quantity'=>['required'],
             'beneficiaries'=>['required'],
-            'location'=>['required','string'],
-            'status'=>['required','string',Rule::in(['Approved','Pending','NotApproved'])]
+            'location'=>['required'],
+            'status'=>['required']
 
         ];
     }

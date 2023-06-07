@@ -50,9 +50,7 @@ class FoodBankController extends Controller
           'snacks'=>$request->snacks,
           'cash'=>$request->cash,
         ]);
-        return $this->success([
-          'data'=>$food
-        ]);
+        return response()->json($food);
           }
 
     /**

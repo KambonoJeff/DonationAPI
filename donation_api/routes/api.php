@@ -11,6 +11,7 @@ use App\Http\Controllers\PostRequestController;
 Route::group(['middleware'=> ['auth:sanctum']], function(){
   Route::get('/ngo/show', [NgoController::class,'show']);//NGO
   Route::get('/showuser/{id}', [AuthController::class,'showUser']);//NGO ADMIN
+  Route::delete('/showusers/{id}', [AuthController::class,'destroy']);//NGO ADMIN
   Route::post('/logout', [AuthController::class,'logout']);//USER
 
 

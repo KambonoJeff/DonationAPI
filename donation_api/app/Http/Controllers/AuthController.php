@@ -72,4 +72,9 @@ class AuthController extends Controller
 
       return response()->json('Logged Out', 200);
     }
+    public function destroy(Request $request){
+      $data = User::FindOrFail($request->id);
+      $data->delete();
+      return response()->json('',204);
+    }
 }

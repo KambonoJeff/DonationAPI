@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Ngo;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreNgoRequest;
-use App\Http\Requests\UpdateNgoRequest;
 
 class NgoController extends Controller
 {
@@ -83,5 +81,10 @@ class NgoController extends Controller
     public function logout(Ngo $ngo)
     {
         return response()->json('You  Hvae been logged out and Api TOken deleted!');
+    }
+    public function destroy(Request $request){
+      $data = Ngo::FindOrFail($request->id);
+      $data->delete();
+      return response()->json('',204);
     }
 }

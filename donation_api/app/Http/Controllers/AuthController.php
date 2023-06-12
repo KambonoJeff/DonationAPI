@@ -54,7 +54,7 @@ class AuthController extends Controller
     }
     public function showUsers(){
       //working
-      return User::get()->all();
+      return User::query()->orderBy('id','desc')->paginate();
     }
     public function showUser($id){
       //working

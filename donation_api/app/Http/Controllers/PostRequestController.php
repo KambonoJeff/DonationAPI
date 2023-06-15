@@ -24,6 +24,7 @@ class PostRequestController extends Controller
      */
     public function debugtest(StorePostRequestRequest $request)
     {
+      //to be reviewed
         // $request->validated($request->all());
         // $postedrequest = PostRequest::create([
         //   'user_id'=>$request->user_id,

@@ -71,7 +71,7 @@ class NgoController extends Controller
     public function show()
     {
       //working
-        $ngo = Ngo::query()->orderBy('id', 'desc')->paginate();
+        $ngo = Ngo::query()->orderBy('id', 'desc')->paginate(5);
         return response()->json($ngo);
     }
 

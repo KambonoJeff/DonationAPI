@@ -16,7 +16,7 @@ class PostRequestController extends Controller
     public function index()
     {
       //WORKING
-        $postedrequests = PostRequest::query()->orderBy('id' , 'desc')->paginate();
+        $postedrequests = PostRequest::query()->orderBy('id' , 'desc')->paginate(6);
         return response()->json($postedrequests);
     }
     /**

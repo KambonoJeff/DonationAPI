@@ -59,9 +59,7 @@ class FoodBankController extends Controller
     public function show($id)
     {
         $data = FoodBank::findOrFail($id);
-        return $this->success([
-          'data'=>$data
-        ]);
+        return response()->json($data);
     }
 
     /**

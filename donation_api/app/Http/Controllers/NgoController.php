@@ -41,27 +41,28 @@ class NgoController extends Controller
         'name'=>['required','string'],
         'licenseNo'=>['required','integer','min:6']
       ]);
-      // $name = $request->name;
-      // $num =$request->licenseNo;
-      // $ngo = Ngo::where('name',$name)->first();
+       $name = $request->name;
+       $num =$request->licenseNo;
 
-      // if(!$ngo){
-      //   return $this->error('','Credentials do not Match!!',401);
-      // }
-      // if( !Hash::check($num, $ngo->licenseNo) )
-      //   {
-      //     return $this->error('','Credentials do not Match!!',401);
-      //   }
-      // else{
-      //   return $this->success([
-      //     'name'=>$name,
-      //     'licenseNumber'=>$num,
-      //     'token'=>$ngo->createToken('Api Toke of'.$ngo->name)->plainTextToken
+       $ngo = Ngo::where('name',$name)->first();
+       $numCheck = Ngo::where('licenseNo',$num)->first();
 
-      //   ]);
-      //  };
+      if(!$ngo && !$numCheck){
+        return response()->json(['message'=>'Credential unmatched']);
+      }
+      //  if( !Hash::check($num, $ngo->licenseNo) )
+      //    {
+      //      return response()->json(['message'=>'Credential Hash unmatched']);
+      //    }
+       else{
+         return response()->json([
+          'name'=>$ngo,
+           'token'=>$ngo->createToken('Api Toke of'.$ngo->name)->plainTextToken
+         ]);
 
-      return response()->json($data);
+        };
+
+
 
     }
 

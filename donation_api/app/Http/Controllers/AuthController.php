@@ -16,20 +16,35 @@ class AuthController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(UserLoginRequest $request)
+    public function index(Request $request)
     {
       //working
-      $credentials = $request->validated($request->all());
-      if(!Auth()->check($credentials)){
-        return response([
-          'message'=>'provided Email or Password is incorrect!'
+     $data = $request->validate([
+        'email'=>['required','email'],
+        'password'=>['required','min:8'],
+     ]);
+     if($data){
+      $email = $request->email;
+      $pass = $request->password;
+      $check = User::where('email',$email)->first();
+      if(!$check){
+        return response()->json([
+          'message'=>'Credentials do not match'
         ]);
       }
-      $user = User::where('email', $request->email)->first();
+      if(!Hash::check($pass , $check->password)){
         return response()->json([
-          'user'=>$user,
-          'token'=>$user->createToken('Api token of'.$user->name)->plainTextToken
+          'message'=>'Credentials do not match'
         ]);
+      }else{
+        return response()->json([
+          $check,
+        'token'=>$check->createToken('ACCESS_TOKEN')->plainTextToken
+        ]);
+      }
+
+
+     }
 
     }
 

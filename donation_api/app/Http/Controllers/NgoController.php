@@ -38,12 +38,12 @@ class NgoController extends Controller
     {
       //working
       $request->validate([
-        'email'=>['required','email','string'],
+        'name'=>['required','string'],
         'licenseNo'=>['required','integer','min:6']
       ]);
-      $email = $request->email;
+      $name = $request->name;
       $num =$request->licenseNo;
-      $ngo = Ngo::where('email',$email)->first();
+      $ngo = Ngo::where('name',$name)->first();
 
       if(!$ngo){
         return $this->error('','Credentials do not Match!!',401);
@@ -54,10 +54,8 @@ class NgoController extends Controller
         }
       else{
         return $this->success([
-          'userInput'=>$num,
-
-          'DBemail'=>$ngo->email,
-
+          'name'=>$name,
+          'licenseNumber'=>$num,
           'token'=>$ngo->createToken('Api Toke of'.$ngo->name)->plainTextToken
 
         ]);

@@ -29,7 +29,16 @@ Route::group(['middleware'=> ['auth:sanctum']], function(){
 
 });
 
+Route::post('/admin/login',
+  function(Request $request){
+    $request->validate([
+      'name'=>['Required','string','min:6'],
+      'email'=>['Required','email'],
+      'password'=>['Required','email','confirmed'],
+    ]);
 
+  }
+);
 //User Authentication
 Route::post('/register', [AuthController::class,'create']);
 Route::post('/login', [AuthController::class,'index']);

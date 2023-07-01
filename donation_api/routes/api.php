@@ -31,10 +31,11 @@ Route::group(['middleware'=> ['auth:sanctum']], function(){
 
 Route::post('/admin/login',
   function(Request $request){
-    $request->validate([
-      'name'=>['Required','string','min:6'],
-      'email'=>['Required','email'],
-      'password'=>['Required','email','confirmed'],
+   $data  =  $request;
+    $send = $data['name'];
+    return response()->json([
+      'data'=>$send,
+      'token'=>"3o48tqpa8t4c0hq3489t 0q3894thq038ctu-248tv-qwe89hq3498"
     ]);
 
   }

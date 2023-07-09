@@ -38,7 +38,7 @@ Route::post('/admin/login',
       'token'=>"3o48tqpa8t4c0hq3489t 0q3894thq038ctu-248tv-qwe89hq3498"
     ]);
 
-  }
+  } 
 );
 //User Authentication
 Route::post('/register', [AuthController::class,'create']);

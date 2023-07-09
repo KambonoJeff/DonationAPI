@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
           $this->call([
             FoodBankSeeder::class
           ]);
+          $this->call([
+            AdminSeeder::class
+          ]);
 
     }
 }

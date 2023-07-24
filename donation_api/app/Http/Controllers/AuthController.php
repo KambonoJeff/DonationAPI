@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 
 class AuthController extends Controller
@@ -39,6 +37,8 @@ class AuthController extends Controller
       }else{
         return response()->json([
           $check,
+        'type'=>'user',
+
         'token'=>$check->createToken('ACCESS_TOKEN')->plainTextToken
         ]);
       }

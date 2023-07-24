@@ -78,7 +78,10 @@ class NgoController extends Controller
     }
     public function showNgo($id){
       $ngo = Ngo::findOrFail($id);
-      return response()->json($ngo);
+          return response()->json([$ngo,
+          'type'=>'user',
+
+        ]);
 
     }
     /**

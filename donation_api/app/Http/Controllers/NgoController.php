@@ -26,7 +26,7 @@ class NgoController extends Controller
       ]);
       return $this->success([
         'user'=>$user,
-        'type'=>'user'
+        'type'=>'admin'
 ,
         'token'=>$user->createToken('Token of'.$user->name)->plainTextToken
       ]);
@@ -56,6 +56,8 @@ class NgoController extends Controller
        else{
          return response()->json([
           'name'=>$ngo,
+          'type'=>'admin'
+,
            'token'=>$ngo->createToken('Api Toke of'.$ngo->name)->plainTextToken
          ]);
 

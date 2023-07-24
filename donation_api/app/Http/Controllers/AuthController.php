@@ -63,7 +63,7 @@ class AuthController extends Controller
       ]);
       return response()->json([
         $user,
-        'type'=>'admin'
+        'type'=>'user'
 ,
         'token'=>$user->createToken('ACCESS_TOKEN')->plainTextToken
       ],200);

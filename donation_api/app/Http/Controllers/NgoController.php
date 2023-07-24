@@ -50,10 +50,7 @@ class NgoController extends Controller
       if(!$ngo && !$numCheck){
         return response()->json(['message'=>'Credential unmatched']);
       }
-      //  if( !Hash::check($num, $ngo->licenseNo) )
-      //    {
-      //      return response()->json(['message'=>'Credential Hash unmatched']);
-      //    }
+
        else{
          return response()->json([
           'name'=>$ngo,

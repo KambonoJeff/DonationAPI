@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NgoController;
@@ -14,8 +15,6 @@ Route::group(['middleware'=> ['auth:sanctum']], function(){
   Route::get('/showuser/{id}', [AuthController::class,'showUser']);//NGO ADMIN
   Route::delete('/showusers/{id}', [AuthController::class,'destroy']);//NGO ADMIN
   Route::post('/logout', [AuthController::class,'logout']);//USER
-
-
   Route::post('/debugtest', [PostRequestController::class,'debugtest']);//USER
 
 
@@ -29,17 +28,7 @@ Route::group(['middleware'=> ['auth:sanctum']], function(){
 
 });
 
-Route::post('/admin/login',
-  function(Request $request){
-   $data  =  $request;
-    $send = $data['name'];
-    return response()->json([
-      'data'=>$send,
-      'token'=>"3o48tqpa8t4c0hq3489t 0q3894thq038ctu-248tv-qwe89hq3498"
-    ]);
 
-  } 
-);
 //User Authentication
 Route::post('/register', [AuthController::class,'create']);
 Route::post('/login', [AuthController::class,'index']);
@@ -47,3 +36,10 @@ Route::post('/login', [AuthController::class,'index']);
 Route::post('/ngo/register', [NgoController::class,'create']);
 Route::post('/ngo/login', [NgoController::class,'login']);
 
+Route::group(['middleware'=> ['auth:sanctum']], function(){
+
+Route::post('/admin/login',[AdminController::class,'index'])->name('admin');
+
+
+
+});

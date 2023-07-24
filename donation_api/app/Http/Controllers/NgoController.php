@@ -26,6 +26,8 @@ class NgoController extends Controller
       ]);
       return $this->success([
         'user'=>$user,
+        'type'=>'user'
+,
         'token'=>$user->createToken('Token of'.$user->name)->plainTextToken
       ]);
 

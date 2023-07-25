@@ -38,8 +38,8 @@ Route::post('/ngo/login', [NgoController::class,'login']);
 
 Route::group(['middleware'=> ['auth:sanctum']], function(){
 
-Route::post('/admin/login',[AdminController::class,'index'])->name('admin');
 
 
 
 });
+Route::post('/admin/login',[AdminController::class,'index'])->name('admin');

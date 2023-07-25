@@ -24,11 +24,11 @@ class NgoController extends Controller
         'phonenumber'=>$request->phonenumber,
         'licenseNo'=>Hash::make($request->licenseNo),
       ]);
-      return $this->success([
-        'user'=>$user,
-        'type'=>'ngo'
-,
-        'token'=>$user->createToken('Token of'.$user->name)->plainTextToken
+      return response()->json([
+'data'=>$user,
+'type'=>'ngo',
+'token'=>$user->createToken('ngo TOken')->plainTextToken
+
       ]);
 
     }

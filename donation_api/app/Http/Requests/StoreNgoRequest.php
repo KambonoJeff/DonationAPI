@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class StoreNgoRequest extends FormRequest
 {
     /**
-     * 
+     *
      */
     public function authorize(): bool
     {
@@ -22,7 +22,7 @@ class StoreNgoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','string','max:255',],
+            'name'=>['required','string','max:255'],
             'email'=>['required','unique:Ngo','string'],
             'location'=>['required','string'],
             'beneficiaries'=>['required','integer'],

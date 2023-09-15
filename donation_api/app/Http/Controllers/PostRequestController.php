@@ -25,16 +25,16 @@ class PostRequestController extends Controller
     public function debugtest(StorePostRequestRequest $request)
     {
       //to be reviewed
-        // $request->validated($request->all());
-        // $postedrequest = PostRequest::create([
-        //   'user_id'=>$request->user_id,
-        //   'typeoffood'=>$request->typeoffood,
-        //   'quantity'=>$request->quantity,
-        //   'beneficiaries'=>$request->beneficiaries,
-        //   'location'=>$request->location,
-        //   'status'=>$request->status,
-        // ]);
-        return $request;
+         $request->validated($request->all());
+         $postedrequest = PostRequest::create([
+           'user_id'=>$request->user_id,
+           'typeoffood'=>$request->typeoffood,
+           'quantity'=>$request->quantity,
+           'beneficiaries'=>$request->beneficiaries,
+           'location'=>$request->location,
+           'status'=>$request->status,
+         ]);
+        return response()->json($postedrequest);
     }
 
     /**
@@ -43,27 +43,26 @@ class PostRequestController extends Controller
     public function show($id)
     {
         $data = PostRequest::findOrFail($id);
-        return $this->success([
-          'data'=>$data
-        ]);
+        return response()->json($data);
     }
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdatePostRequestRequest $request, $id)
     {
-      // $request->validated($request->all());
-      // $post = PostRequest::findOrFail($id);
-      // $post->update([
-      //   $post->user_id= $request->user_id,
-      //   $post->typeoffood= $request->typeoffood,
-      //   $post->quantity= $request->quantity,
-      //   $post->beneficiaries= $request->beneficiaries,
-      //   $post->location= $request->location,
-      //   $post->status= $request->status,
-      // ]);
-      // $post->save();
-      return $request;
+      
+       $request->validated($request->all());
+       $post = PostRequest::findOrFail($id);
+       $post->update([
+         $post->user_id= $request->user_id,
+         $post->typeoffood= $request->typeoffood,
+         $post->quantity= $request->quantity,
+         $post->beneficiaries= $request->beneficiaries,
+         $post->location= $request->location,
+         $post->status= $request->status,
+       ]);
+       $post->save();
+      return response()->json($post);
 
     }
 
@@ -74,6 +73,6 @@ class PostRequestController extends Controller
     {
         $data = PostRequest::findOrFail($id);
         $data->delete();
-        return response([],204);
+        return response('deleted',204);
     }
 }

@@ -13,7 +13,7 @@ class FoodBankPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,9 @@ class FoodBankPolicy
      */
     public function view(User $user, FoodBank $foodBank): bool
     {
-        //
+
+      return true;
+
     }
 
     /**
@@ -30,6 +32,8 @@ class FoodBankPolicy
     public function create(User $user): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -38,6 +42,8 @@ class FoodBankPolicy
     public function update(User $user, FoodBank $foodBank): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -46,6 +52,8 @@ class FoodBankPolicy
     public function delete(User $user, FoodBank $foodBank): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -54,6 +62,8 @@ class FoodBankPolicy
     public function restore(User $user, FoodBank $foodBank): bool
     {
         //
+        return true;
+
     }
 
     /**
@@ -62,5 +72,7 @@ class FoodBankPolicy
     public function forceDelete(User $user, FoodBank $foodBank): bool
     {
         //
+        return true;
+
     }
 }

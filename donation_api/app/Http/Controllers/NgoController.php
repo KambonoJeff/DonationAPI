@@ -43,25 +43,37 @@ class NgoController extends Controller
         'name'=>['required','string'],
         'licenseNo'=>['required','integer','min:6']
       ]);
-       $name = $request->name;
-       $num =$request->licenseNo;
+      if($data){
+        $name = $request->name;
+        $num =$request->licenseNo;
+        $ngo = Ngo::where('name',$name)->first();
+        $numCheck = Ngo::where('licenseNo',$num)->first();
 
-       $ngo = Ngo::where('name',$name)->first();
-       $numCheck = Ngo::where('licenseNo',$num)->first();
+        if(!$ngo ){
+          return response()->json([
+            'message'=>'Credential unmatched!'
+          ]);
+        }
+        if(!$numCheck){
+          return response()->json([
+            'message'=>'Credential unmatched!'
+          ]);
+        }
 
-      if(!$ngo && !$numCheck){
-        return response()->json(['message'=>'Credential unmatched']);
+         else{
+           return response()->json([
+            'name'=>$ngo,
+            'type'=>'ngo',
+             'token'=>$ngo->createToken('Api Toke of'.$ngo->name)->plainTextToken
+           ]);
+          }
+      }
+      else{
+        return response()->json([
+          'message'=>'Credentials Unmatched!'
+        ]);
       }
 
-       else{
-         return response()->json([
-          'name'=>$ngo,
-          'type'=>'ngo'
-,
-           'token'=>$ngo->createToken('Api Toke of'.$ngo->name)->plainTextToken
-         ]);
-
-        };
 
 
 

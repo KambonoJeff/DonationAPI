@@ -14,6 +14,8 @@ class PostRequestPolicy
     public function viewAny(User $user): bool
     {
         //
+      return false;
+
     }
 
     /**
@@ -22,6 +24,8 @@ class PostRequestPolicy
     public function view(User $user, PostRequest $postRequest): bool
     {
         //
+      return false;
+
     }
 
     /**
@@ -30,6 +34,8 @@ class PostRequestPolicy
     public function create(User $user): bool
     {
         //
+      return false;
+
     }
 
     /**
@@ -38,6 +44,8 @@ class PostRequestPolicy
     public function update(User $user, PostRequest $postRequest): bool
     {
         //
+      return false;
+
     }
 
     /**
@@ -46,6 +54,8 @@ class PostRequestPolicy
     public function delete(User $user, PostRequest $postRequest): bool
     {
         //
+      return false;
+
     }
 
     /**
@@ -54,6 +64,8 @@ class PostRequestPolicy
     public function restore(User $user, PostRequest $postRequest): bool
     {
         //
+      return false;
+
     }
 
     /**
@@ -62,5 +74,7 @@ class PostRequestPolicy
     public function forceDelete(User $user, PostRequest $postRequest): bool
     {
         //
+      return false;
+
     }
 }

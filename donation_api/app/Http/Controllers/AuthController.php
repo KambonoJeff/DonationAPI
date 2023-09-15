@@ -71,15 +71,12 @@ class AuthController extends Controller
     }
     public function showUsers(){
       //working
-      return User::query()->orderBy('id','desc')->paginate(4);
+      return User::query()->orderBy('id','desc')->paginate(7);
     }
     public function showUser($id){
       //working
       $user = User::findOrFail($id);
-      return $this->success([
-        'user'=> $user,
-
-      ]);
+      return response()->json($user);
     }
     public function logout(Request $request)
     {

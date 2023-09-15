@@ -6,6 +6,8 @@ use App\Models\Ngo;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
+use function PHPUnit\Framework\isFalse;
+
 class NgoPolicy
 {
     /**
@@ -14,6 +16,9 @@ class NgoPolicy
     public function viewAny(User $user): bool
     {
         //
+      return false;
+      isFalse();
+
     }
 
     /**
@@ -22,6 +27,9 @@ class NgoPolicy
     public function view(User $user, Ngo $ngo): bool
     {
         //
+      return false;
+      isFalse();
+
     }
 
     /**
@@ -30,6 +38,9 @@ class NgoPolicy
     public function create(User $user): bool
     {
         //
+      return false;
+      isFalse();
+
     }
 
     /**
@@ -38,6 +49,9 @@ class NgoPolicy
     public function update(User $user, Ngo $ngo): bool
     {
         //
+      return false;
+      isFalse();
+
     }
 
     /**
@@ -46,6 +60,9 @@ class NgoPolicy
     public function delete(User $user, Ngo $ngo): bool
     {
         //
+      return false;
+      isFalse();
+
     }
 
     /**
@@ -54,6 +71,9 @@ class NgoPolicy
     public function restore(User $user, Ngo $ngo): bool
     {
         //
+      return false;
+      isFalse();
+
     }
 
     /**
@@ -62,5 +82,8 @@ class NgoPolicy
     public function forceDelete(User $user, Ngo $ngo): bool
     {
         //
+      return false;
+      isFalse();
+
     }
 }

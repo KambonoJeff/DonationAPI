@@ -47,18 +47,17 @@ class NgoController extends Controller
         $name = $request->name;
         $num =$request->licenseNo;
         $ngo = Ngo::where('name',$name)->first();
-        $numCheck = Ngo::where('licenseNo',$num)->first();
 
         if(!$ngo ){
           return response()->json([
-            'message'=>'Credential unmatched!'
+            'message'=>'Credential unmatched! name not matched'
           ]);
         }
-        if(!$numCheck){
-          return response()->json([
-            'message'=>'Credential unmatched!'
-          ]);
-        }
+         if(!Hash::check($num,$ngo->licenseNo)){
+           return response()->json([
+             'message'=>'Credential unmatched! license number not matched'
+           ]);
+         }
 
          else{
            return response()->json([
@@ -70,7 +69,7 @@ class NgoController extends Controller
       }
       else{
         return response()->json([
-          'message'=>'Credentials Unmatched!'
+          'message'=>'Credentials Unmatched! from validation'
         ]);
       }
 

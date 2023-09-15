@@ -35,8 +35,9 @@ class AuthController extends Controller
           'message'=>'Credentials do not match'
         ]);
       }else{
+        $userName = strtoupper($check->name);
         return response()->json([
-          $check,
+          $userName,
         'type'=>'user',
 
         'token'=>$check->createToken('ACCESS_TOKEN')->plainTextToken

@@ -44,3 +44,4 @@ Route::group(['middleware'=> ['auth:sanctum']], function(){
 
 });
 Route::post('/admin/login',[AdminController::class,'index'])->name('admin');
+Route::post('/admin/register',[AdminController::class,'create'])->name('adminregister');

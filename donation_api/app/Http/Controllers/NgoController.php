@@ -77,6 +77,25 @@ class NgoController extends Controller
 
 
     }
+    public function update(Request $request,$id)
+    {
+      $data = $request->validate([
+        'name'=>['sometime','string','max:255'],
+        'email'=>['sometime','string'],
+        'location'=>['sometime','string'],
+        'beneficiaries'=>['sometime','integer'],
+        'phonenumber'=>['sometime','string','max:15'],
+        'licenseNo'=>['sometime','integer','min:6']
+      ]);
+      if(!$data){
+        return response()->json([
+          'message'=>'An error occured in validation!'
+        ]);
+      }else{
+        $ngo = Ngo::findOrFail($id)->first();
+      }
+
+    }
 
     /**
      * Display the specified resource.

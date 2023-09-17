@@ -99,7 +99,7 @@ class FoodBankController extends Controller
     public function update(UpdateFoodBankRequest $request,$id )
     {
         $request->validated($request->all());
-        $food= FoodBank::findOrFail($id);
+        $food= FoodBank::findOrFail($id)->first();
         if(!$food){
           return response()->json([
             'message'=>'Not found'

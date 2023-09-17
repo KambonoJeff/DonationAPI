@@ -19,6 +19,7 @@ Route::group(['middleware'=> ['auth:sanctum']], function(){
   Route::post('/logout', [AuthController::class,'logout']);//USER
   Route::post('/edit/user/{id}', [AuthController::class,'update']);//USER
   Route::post('/debugtest', [PostRequestController::class,'debugtest']);//USER
+  Route::get('/requests/compare', [PostRequestController::class,'compare']);//USER
   Route::get('/requests/{id}',[PostRequestController::class,'show']);
   Route::get('/ngo/logout', [NgoController::class,'logout']);//NGO
   Route::get('/sumfood', [FoodBankController::class,'sumall']);//NGO

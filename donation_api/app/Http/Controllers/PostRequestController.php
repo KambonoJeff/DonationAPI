@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\PostRequest;
+use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorePostRequestRequest;
 use App\Http\Requests\UpdatePostRequestRequest;
-use App\Traits\HttpResponses;
 
 class PostRequestController extends Controller
 {
@@ -50,7 +51,7 @@ class PostRequestController extends Controller
      */
     public function update(UpdatePostRequestRequest $request, $id)
     {
-      
+
        $request->validated($request->all());
        $post = PostRequest::findOrFail($id);
        $post->update([
@@ -75,4 +76,47 @@ class PostRequestController extends Controller
         $data->delete();
         return response('deleted',204);
     }
+    public function compare()
+    {
+      $cereals = DB::table('post_requests')
+          ->select('quantity')
+          ->where('typeoffood' ,'=','cereals')
+          ->get()
+          ->all();
+      $proteins = DB::table('post_requests')
+          ->select('quantity')
+          ->where('typeoffood', '=' , 'proteins')
+          ->get()
+          ->all();
+      $legume = DB::table('post_requests')
+          ->select('quantity')
+          ->where('typeoffood','=','legumes')
+          ->get()
+          ->all();
+      $snacks = DB::table('post_requests')
+          ->select('quantity')
+          ->where('typeoffood','=','snacks')
+          ->get()
+          ->all();
+      $breakfast=DB::table('post_Request')
+          ->select('quantity')
+          ->where('typeoffood','=','breakfast')
+          ->get()
+          ->all();
+
+
+      if(!$cereals){
+        return response()->json([
+          'message'=>'Error when Querying base'
+        ],404);
+      }
+
+      return response()->json([
+        'message'=>'Responded with a 200',
+         $cereals
+      ],200);
+    }
+
+
+
 }

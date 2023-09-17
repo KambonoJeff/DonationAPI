@@ -90,9 +90,28 @@ class NgoController extends Controller
       if(!$data){
         return response()->json([
           'message'=>'An error occured in validation!'
-        ]);
+        ],404);
       }else{
         $ngo = Ngo::findOrFail($id)->first();
+        if(!$ngo){
+          return response()->json([
+            'message'=>'Not found'
+          ],404);
+        }else{
+          $ngo->update([
+            $ngo->name=$request->name,
+            $ngo->email=$request->email,
+            $ngo->location=$request->location,
+            $ngo->beneficiaries=$request->beneficiaries,
+            $ngo->phonenumber=$request->phonenumber,
+            $ngo->licenseNo=$request->licenseNo
+          ]);
+          $ngo->save();
+          $ngo->save();
+          return response()->json([
+            $ngo
+          ],200);
+        }
       }
 
     }

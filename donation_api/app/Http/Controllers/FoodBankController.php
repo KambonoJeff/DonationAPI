@@ -114,7 +114,13 @@ class FoodBankController extends Controller
             $food->cash = $request->cash,
           ]);
           $food->save();
-          return response()->json([$food]);
+          $food->save();
+          $food->save();
+          return response()->json([
+            'message'=>'sucsefully updated',
+            $food
+
+          ]);
 
 
         }

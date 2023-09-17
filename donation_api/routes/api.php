@@ -11,6 +11,7 @@ use App\Http\Controllers\PostRequestController;
 
 Route::group(['middleware'=> ['auth:sanctum']], function(){
   Route::get('/ngo/show', [NgoController::class,'show']);//NGO
+  Route::post('/ngo/update/{id}', [NgoController::class,'update']);//NGO
   Route::get('/showngo/{id}', [NgoController::class,'showNgo']);//NGO
   Route::delete('/ngo/delete/{id}', [NgoController::class,'destroy']);//NGO
   Route::get('/showoneuser/{id}', [AuthController::class,'showUser']);//NGO ADMIN
@@ -21,15 +22,18 @@ Route::group(['middleware'=> ['auth:sanctum']], function(){
   Route::get('/requests/{id}',[PostRequestController::class,'show']);
   Route::get('/ngo/logout', [NgoController::class,'logout']);//NGO
   Route::get('/sumfood', [FoodBankController::class,'sumall']);//NGO
-  Route::get('/food/delete/{id}', [FoodBankController::class,'destroy']);//NGO
-  Route::get('/food/update/{id}', [FoodBankController::class,'update']);//NGO
-  Route::apiResource('/food',FoodBankController::class);//USER||ADMIN||NGO
+  Route::delete('/food/delete/{id}', [FoodBankController::class,'destroy']);//NGO
   Route::get('/showusers', [AuthController::class,'showUsers']);//ADMIN
   Route::get('/user',function(Request $request){
     return $request->user()->name;//USER||ADMIN||NGO
   });
   Route::get('/PostRequest',[PostRequestController::class,'index']);
   Route::post('/PostRequest/{id}', [PostRequestController::class,'update']);
+  Route::post('/food/update/{id}', [FoodBankController::class,'update']);//NGO
+  Route::get('/food', [FoodBankController::class,'index']);//NGO
+  Route::post('/food', [FoodBankController::class,'store']);//NGO
+  Route::get('/food/{id}', [FoodBankController::class,'show']);//NGO
+
   Route::delete('/PostRequest/{id}',[PostRequestController::class,'destroy']);
 });
 

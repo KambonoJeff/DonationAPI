@@ -88,7 +88,7 @@ class PostRequestController extends Controller
           ->where('typeoffood', '=' , 'proteins')
           ->get()
           ->all();
-      $legume = DB::table('post_requests')
+      $legumes = DB::table('post_requests')
           ->select('quantity')
           ->where('typeoffood','=','legumes')
           ->get()
@@ -98,22 +98,34 @@ class PostRequestController extends Controller
           ->where('typeoffood','=','snacks')
           ->get()
           ->all();
-      $breakfast=DB::table('post_Request')
+      $breakfast=DB::table('post_Requests')
           ->select('quantity')
           ->where('typeoffood','=','breakfast')
           ->get()
           ->all();
+      $func = function($x){
+        return $x->quantity;
+      };
+      // getting the values
+      $mappedcereals=array_map($func,$cereals);
+      $mappedproteins=array_map($func,$proteins);
+      $mappedlegumes=array_map($func,$legumes);
+      $mappedsnacks=array_map($func,$snacks);
+      $mappedbreakfast=array_map($func,$breakfast);
+      // adding the array
 
-
-      if(!$cereals){
-        return response()->json([
-          'message'=>'Error when Querying base'
-        ],404);
-      }
+      $totalcereals = array_sum($mappedcereals);
+      $totalproteins = array_sum($mappedproteins);
+      $totallegumes = array_sum($mappedlegumes);
+      $totalsnacks = array_sum($mappedsnacks);
+      $totalbreakfast = array_sum($mappedbreakfast);
 
       return response()->json([
-        'message'=>'Responded with a 200',
-         $cereals
+        'Cereals'=>$totalcereals,
+       'Proteins'=>$totalproteins,
+       'Legumes'=>$totallegumes,
+       'Snacks'=>$totalsnacks,
+       'Breakfast'=>$totalbreakfast
       ],200);
     }
 

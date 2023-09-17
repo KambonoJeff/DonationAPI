@@ -61,7 +61,7 @@ class NgoController extends Controller
 
          else{
            return response()->json([
-            'name'=>$ngo,
+            strtoupper($ngo->name),
             'type'=>'ngo',
              'token'=>$ngo->createToken('Api Toke of'.$ngo->name)->plainTextToken
            ]);
@@ -84,7 +84,7 @@ class NgoController extends Controller
     public function show()
     {
       //working
-        $ngo = Ngo::query()->orderBy('id', 'desc')->paginate(5);
+        $ngo = Ngo::query()->orderBy('id', 'desc')->paginate(3);
         return response()->json([$ngo,
         'type'=>'user',
 

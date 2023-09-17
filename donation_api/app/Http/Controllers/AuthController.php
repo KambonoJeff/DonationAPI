@@ -62,8 +62,11 @@ class AuthController extends Controller
         'type'=>$request->type,
         'password'=>Hash::make($request->password)
       ]);
+      $email=$user->email;
+      $data=User::where('email',$email)->first();
+      $data['created_at']= $data->created_at->format('y-m-d h:i');
       return response()->json([
-        $user,
+        $data,
         'type'=>'user'
 ,
         'token'=>$user->createToken('ACCESS_TOKEN')->plainTextToken
@@ -92,4 +95,36 @@ class AuthController extends Controller
       $data->delete();
       return response()->json('',204);
     }
+    public function update(Request $request,$id)
+    {
+      $request->validate([
+        'name'=>['required','string'],
+        'email'=>['required','email'],
+        'type'=>['required','string'],
+      ]);
+
+      $data= User::findOrFail($id);
+      if(!$data){
+        return response()->json([
+          'error'=>'Not Found!'
+        ],404);
+      }
+      $data->update([
+        $data->name = $request->name,
+        $data->email = $request->email,
+        $data->type = $request->type,
+
+
+      ]);
+      $data->save();
+      return response()->json([
+        'data'=>$data
+      ]);
+
+    }
+
+
+
+
+
 }

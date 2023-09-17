@@ -80,19 +80,18 @@ class NgoController extends Controller
     public function update(Request $request,$id)
     {
       $data = $request->validate([
-        'name'=>['sometime','string','max:255'],
-        'email'=>['sometime','string'],
-        'location'=>['sometime','string'],
-        'beneficiaries'=>['sometime','integer'],
-        'phonenumber'=>['sometime','string','max:15'],
-        'licenseNo'=>['sometime','integer','min:6']
+        'name'=>['string','max:255'],
+        'email'=>['string'],
+        'location'=>['string'],
+        'beneficiaries'=>['integer'],
+        'phonenumber'=>['string','max:15'],
       ]);
       if(!$data){
         return response()->json([
           'message'=>'An error occured in validation!'
         ],404);
       }else{
-        $ngo = Ngo::findOrFail($id)->first();
+        $ngo = Ngo::findOrFail($id);
         if(!$ngo){
           return response()->json([
             'message'=>'Not found'
@@ -104,7 +103,6 @@ class NgoController extends Controller
             $ngo->location=$request->location,
             $ngo->beneficiaries=$request->beneficiaries,
             $ngo->phonenumber=$request->phonenumber,
-            $ngo->licenseNo=$request->licenseNo
           ]);
           $ngo->save();
           $ngo->save();
@@ -122,7 +120,7 @@ class NgoController extends Controller
     public function show()
     {
       //working
-        $ngo = Ngo::query()->orderBy('id', 'desc')->paginate(3);
+        $ngo = Ngo::query()->orderBy('id', 'desc')->paginate(4);
         return response()->json([$ngo,
         'type'=>'user',
 

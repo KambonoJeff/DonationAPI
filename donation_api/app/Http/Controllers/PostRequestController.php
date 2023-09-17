@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PostRequest;
+use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorePostRequestRequest;
@@ -127,6 +128,11 @@ class PostRequestController extends Controller
        'Snacks'=>$totalsnacks,
        'Breakfast'=>$totalbreakfast
       ],200);
+    }
+    public function diffrence(Request $request){
+        return response()->json([
+        ]);
+
     }
 
 

@@ -16,7 +16,7 @@ class FoodBankController extends Controller
      */
     public function index()
     {
-        $food = FoodBank::query()->orderBy('id', 'desc')->paginate(7);
+        $food = FoodBank::query()->orderBy('id', 'desc')->paginate(5);
         $sumcash = FoodBank::pluck('cash')->toArray();
         $sumcereals = FoodBank::pluck('cereals')->toArray();
         $sumproteins = FoodBank::pluck('proteins')->toArray();

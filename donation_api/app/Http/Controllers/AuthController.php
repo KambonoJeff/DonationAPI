@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserRegisterRequest;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -64,7 +65,6 @@ class AuthController extends Controller
       ]);
       $email=$user->email;
       $data=User::where('email',$email)->first();
-      $data['created_at']= $data->created_at->format('y-m-d h:i');
       return response()->json([
         $data,
         'type'=>'user'
@@ -75,7 +75,10 @@ class AuthController extends Controller
     }
     public function showUsers(){
       //working
-      return User::query()->orderBy('id','desc')->paginate(7);
+      $data =User::query()->orderBy('id','desc')->paginate(7);
+      // $data->created_at = Carbon::parse($data->created_at)->format('Y-m-d H:i');
+
+      return $data;
     }
     public function showUser($id){
       //working

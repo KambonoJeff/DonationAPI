@@ -8,10 +8,12 @@ use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StorePostRequestRequest;
 use App\Http\Requests\UpdatePostRequestRequest;
+use App\Traits\FetchTotals;
 
 class PostRequestController extends Controller
 {
   use HttpResponses;
+  use FetchTotals;
     /**
      * Display a listing of the resource.
      */
@@ -79,117 +81,30 @@ class PostRequestController extends Controller
     }
     public function compare()
     {
-      $cereals = DB::table('post_requests')
-          ->select('quantity')
-          ->where('typeoffood' ,'=','cereals')
-          ->get()
-          ->all();
-      $proteins = DB::table('post_requests')
-          ->select('quantity')
-          ->where('typeoffood', '=' , 'proteins')
-          ->get()
-          ->all();
-      $legumes = DB::table('post_requests')
-          ->select('quantity')
-          ->where('typeoffood','=','legumes')
-          ->get()
-          ->all();
-      $snacks = DB::table('post_requests')
-          ->select('quantity')
-          ->where('typeoffood','=','snacks')
-          ->get()
-          ->all();
-      $breakfast=DB::table('post_Requests')
-          ->select('quantity')
-          ->where('typeoffood','=','breakfast')
-          ->get()
-          ->all();
-      $func = function($x){
-        return $x->quantity;
-      };
-      // getting the values
-      $mappedcereals=array_map($func,$cereals);
-      $mappedproteins=array_map($func,$proteins);
-      $mappedlegumes=array_map($func,$legumes);
-      $mappedsnacks=array_map($func,$snacks);
-      $mappedbreakfast=array_map($func,$breakfast);
-      // adding the array
-
-    $totalcereals = array_sum($mappedcereals);
-      $totalproteins = array_sum($mappedproteins);
-      $totallegumes = array_sum($mappedlegumes);
-      $totalsnacks = array_sum($mappedsnacks);
-      $totalbreakfast = array_sum($mappedbreakfast);
-
-      return response()->json([
-        'Cereals'=>$totalcereals,
-       'Proteins'=>$totalproteins,
-       'Legumes'=>$totallegumes,
-       'Snacks'=>$totalsnacks,
-       'Breakfast'=>$totalbreakfast
-      ],200);
+      $data =$this->fetchRequests();
+      return $data;
     }
-    public function diffrence(Request $request){
-      $cereals = DB::table('post_requests')
-      ->select('quantity')
-      ->where('typeoffood' ,'=','cereals')
-      ->get()
-      ->all();
-  $proteins = DB::table('post_requests')
-      ->select('quantity')
-      ->where('typeoffood', '=' , 'proteins')
-      ->get()
-      ->all();
-  $legumes = DB::table('post_requests')
-      ->select('quantity')
-      ->where('typeoffood','=','legumes')
-      ->get()
-      ->all();
-  $snacks = DB::table('post_requests')
-      ->select('quantity')
-      ->where('typeoffood','=','snacks')
-      ->get()
-      ->all();
-  $breakfast=DB::table('post_Requests')
-      ->select('quantity')
-      ->where('typeoffood','=','breakfast')
-      ->get()
-      ->all();
-  $func = function($x){
-    return $x->quantity;
-  };
-  // getting the values
-  $mappedcereals=array_map($func,$cereals);
-  $mappedproteins=array_map($func,$proteins);
-  $mappedlegumes=array_map($func,$legumes);
-  $mappedsnacks=array_map($func,$snacks);
-  $mappedbreakfast=array_map($func,$breakfast);
-  // adding the array
-
-$totalcereals = array_sum($mappedcereals);
-  $totalproteins = array_sum($mappedproteins);
-  $totallegumes = array_sum($mappedlegumes);
-  $totalsnacks = array_sum($mappedsnacks);
-  $totalbreakfast = array_sum($mappedbreakfast);
-
-  $cerealDif = $request->cereals - $totalcereals;
-  $proteinDif = $request->proteins - $totalproteins;
-  $legumeDif = $request->legumes - $totallegumes;
-  $snackDif = $request->snacks - $totalsnacks;
-  $breakfastDif = $request->breakfast - $totalbreakfast;
+    public function diffrence(){
+      $data =$this->fetchRequests();
+      $food = $this->fetchFood();
+   $cerealDif = $food[0] - $data['Cereals'];
+   $proteinDif = $food[1] - $data['Proteins'];
+   $legumeDif = $food[2] - $data['Legumes'];
+   $snackDif = $food[3] - $data['Snacks'];
+   $breakfastDif = $food[4] - $data['Breakfast'];
 $data2=[
-  $totalcereals,
-$totalproteins,
-$totallegumes,
-$totalsnacks,
-$totalbreakfast,
+  $data['Cereals'],
+$data['Proteins'],
+$data['Legumes'],
+$data['Snacks'],
+$data['Breakfast']
 ];
   $data = [
-    $cerealDif,
-$proteinDif,
-$legumeDif,
-$snackDif,
-$breakfastDif,
+     $cerealDif,
+ $proteinDif,
+ $legumeDif,
+ $snackDif,
+ $breakfastDif,
 
  ];
  $sum = array_sum($data2);

@@ -7,32 +7,23 @@ use Illuminate\Http\Request;
 use App\Traits\HttpResponses;
 use App\Http\Requests\StoreFoodBankRequest;
 use App\Http\Requests\UpdateFoodBankRequest;
+use App\Traits\FetchTotals;
+
+use function PHPSTORM_META\map;
 
 class FoodBankController extends Controller
 {
     use HttpResponses;
+    use FetchTotals;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $food = FoodBank::query()->orderBy('id', 'desc')->paginate(5);
-        $sumcash = FoodBank::pluck('cash')->toArray();
-        $sumcereals = FoodBank::pluck('cereals')->toArray();
-        $sumproteins = FoodBank::pluck('proteins')->toArray();
-        $sumlegume = FoodBank::pluck('legumes')->toArray();
-        $sumsnacks = FoodBank::pluck('snacks')->toArray();
-        $sumBreak = FoodBank::pluck('breakfast')->toArray();
+        $sums =$this->fetchFood();
 
-          $totalCash =number_format(array_sum($sumcash));
-          $totalBreak =number_format( array_sum($sumBreak));
-          $totalSnacks = number_format(array_sum($sumsnacks));
-          $totaproteins = number_format(array_sum($sumproteins));
-          $totalcereals = number_format(array_sum($sumcereals));
-          $totallegume = number_format(array_sum($sumlegume));
-          $data = [$totalcereals,$totaproteins,$totallegume,$totalBreak,$totalSnacks,$totalCash,$food];
-
-
+        $data = [$sums,$food];
         return response()->json($data);
     }
     public function sumall()
